@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<form action="{% url 'createlisting' %}" method="POST">
+  {%csrf_token%}
+    <fieldset>
+      <legend>Add Product</legend>
+            
+ 
+<p>
+        <label>Product Name <input name="productname" /></label>
+      </p>
+       
+<p>
+        <label>Category<input name="productcategory" /></label>
+      </p>
+
+      <p>
+        <label>Price<input type="number" name="salesprice" /></label>
+      </p>
+
+      <input type="submit" name="submit" />
+ 
+ 
+
+ 
+ 
+     </fieldset>
+    </form>
+{% else %}
+    Not signed in.
+{% endif %}
+
+{% endblock %}

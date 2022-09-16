@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+{% if data %}
+    <div>
+    <ol>
+        {% for dat in data %}
+        <li>{{ dat.item_name }}</li>
+        <ul>
+            <li>{{ dat.category }}</li>
+            <li>${{ dat.price }}</li>
+            <li> {{dat.date_created}} </li>
+            <input type="submit" value="Bid" name="Bid"/>
+
+        </ul>
+        {% endfor %}
+    </ol>
+    
+    </div>
+
+{% else %}
+    No active Listings
+
+{% endif %}
+
+{% endblock %}
