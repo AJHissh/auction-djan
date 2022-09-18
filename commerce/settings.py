@@ -29,7 +29,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 IS_HEROKU = "DYNO" in os.environ
 
 
-if 'SECRET_KEY' in os.environ:
+if "SECRET_KEY" in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
     
 if IS_HEROKU:
