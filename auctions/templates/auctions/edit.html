@@ -1,0 +1,57 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}
+
+
+<form action="{% url 'edit_profile' %}" method="POST">
+  {%csrf_token%}
+    <fieldset>
+      <legend>Change Personal Details</legend>
+            
+ 
+<p>
+        <label>First name: <input name="firstName" /></label>
+      </p>
+       
+<p>
+        <label>Last name: <input name="lastName" /></label>
+      </p>
+
+<p>
+        <label>Email: <input name="email" /></label>
+</p>
+
+  <p>
+    <label>password: <input name="password" /></label>
+  </p>
+      <input type="submit" name="submit" />
+ 
+ 
+
+ 
+ 
+     </fieldset>
+    </form>
+
+    <div>
+        {% if user.is_authenticated %}
+        <p>
+           First name :  <strong>{{ user.first_name }}</strong>.
+        </p>
+           <p>
+           Last name :  <strong>{{ user.last_name }}</strong>.
+        </p>
+           <p>
+           Email :  <strong>{{ user.email }}</strong>.
+        </p>
+        {% else %}
+            Not signed in.
+        {% endif %}
+    </div>
+
+    {% else %}
+    Not signed in.
+    {% endif %}
+
+{% endblock %}
