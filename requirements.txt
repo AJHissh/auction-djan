@@ -95,7 +95,6 @@ prompt-toolkit==3.0.29
 Protego==0.2.1
 psutil==5.9.0
 pure-eval==0.2.2
-py2exe==0.11.1.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
