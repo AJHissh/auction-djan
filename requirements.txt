@@ -134,8 +134,6 @@ tinycss2==1.1.1
 tldextract==3.3.0
 tornado==6.1
 traitlets==5.1.1
-Twisted==22.4.0
-twisted-iocpsupport==1.0.2
 typing_extensions==4.2.0
 tzdata==2022.2
 uritemplate==4.1.1
