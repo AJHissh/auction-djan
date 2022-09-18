@@ -2,4 +2,19 @@
 
 {% block body %}
 
+{% if data %}
+    <div>
+    <ol>
+        {% for dat in data %}
+        <li><a href="">{{ dat.category }}</a></li>
+        {% endfor %}
+    </ol>
+    
+    </div>
+
+{% else %}
+    No active listings
+
+{% endif %}
+
 {% endblock %}

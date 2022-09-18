@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -7,14 +9,12 @@ from django.contrib.auth.decorators import login_required
 
 from .models import User, Listings
 
-# @login_required
 def index(request):
     queries = Listings.objects.all()
     
     return render(request, "auctions/index.html", {
         "data" : queries
     })
-
 
 def login_view(request):
     if request.method == "POST":
@@ -69,7 +69,10 @@ def register(request):
 
 
 def categories(request):
-    return render(request, "auctions/categories.html")
+     queries = Listings.objects.all()
+     return render(request, "auctions/categories.html", {
+        "data" : queries
+    })
 
 def watchlist(request):
     return render(request, "auctions/watchlist.html")
@@ -97,20 +100,26 @@ def edit_profile(request):
         print(request)
         user = authenticate(request, username=current_user, password=password)
         login(request, user)
+        return HttpResponseRedirect(reverse("edit_profile"))
     return render(request, "auctions/edit.html") 
             
 @login_required
 def createlisting(request):
-    if request.method == "POST":
-        product = request.POST["productname"]
-        category = request.POST["productcategory"]
-        price = request.POST["salesprice"]
-        current_user = request.user       
-        obj = Listings.objects.create(owner=current_user)
-        obj.item_name = product
-        obj.category = category
-        obj.price = price
-        obj.owner = str(current_user)
-        obj.save()          
+    try:
+        if request.method == "POST":
+            product = request.POST["productname"]
+            category = request.POST["productcategory"]
+            price = request.POST["salesprice"]
+            current_user = request.user                
+            obj = Listings.objects.create(owner=current_user)
+            obj.item_name = product
+            obj.category = category
+            obj.price = price
+            obj.owner = str(current_user)
+            obj.save()
+    except:
+            return render(request, "auctions/createlisting.html", {
+                    "message": "Please enter correct values except"
+                })    
     return render(request, "auctions/createlisting.html")
 

@@ -5,20 +5,25 @@
 {% if user.is_authenticated %}
 <form action="{% url 'createlisting' %}" method="POST">
   {%csrf_token%}
+  
+  {% if message %}
+  <div>{{ message }}</div>
+  {% endif %}
+
     <fieldset>
       <legend>Add Product</legend>
             
  
 <p>
-        <label>Product Name <input name="productname" /></label>
+        <label>Product Name <input name="productname" required/></label>
       </p>
        
 <p>
-        <label>Category<input name="productcategory" /></label>
+        <label>Category<input name="productcategory" required/></label>
       </p>
 
       <p>
-        <label>Price<input type="number" name="salesprice" /></label>
+        <label>Price<input type="number" required min="0" value="0" step=".01" name="salesprice" /></label>
       </p>
 
       <input type="submit" name="submit" />
