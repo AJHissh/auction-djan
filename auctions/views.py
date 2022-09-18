@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
 from .models import User, Listings
 
 def index(request):
@@ -67,9 +66,17 @@ def register(request):
 
 
 def categories(request):
-     queries = Listings.objects.all()
-     return render(request, "auctions/categories.html", {
-        "data" : queries
+    temp_list = []
+    queries = Listings.objects.all().distinct()
+    for i in queries:
+        if i.category not in temp_list:
+            temp_list.append(i.category)
+            print(i.category)
+    #  queries = Listings.objects.filter(category="Household")
+    upd_queries = temp_list 
+    print(temp_list)
+    return render(request, "auctions/categories.html", {
+        "data" : upd_queries
     })
 
 def watchlist(request):
