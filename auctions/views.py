@@ -117,7 +117,7 @@ def createlisting(request):
             price = request.POST["salesprice"]
             description = request.POST["description"]
             current_user = request.user                
-            obj = Listings.objects.create(owner=current_user)
+            obj = Listings.objects.get_or_create(owner=current_user)
             obj.item_name = product
             obj.category = category
             obj.price = price
