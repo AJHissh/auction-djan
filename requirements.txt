@@ -148,13 +148,9 @@ widgetsnbextension==3.6.0
 XlsxWriter==3.0.2
 yarl==1.8.1
 zipp==3.7.0
-<<<<<<< HEAD
 zope.interface==5.4.0
 asgiref==3.5.2
 Django==4.1     
 gunicorn
 pip
 python-dotenv
-=======
-zope.interface==5.4.0
->>>>>>> 2217b739eafa1e1781262e94c9413435ee72418f
