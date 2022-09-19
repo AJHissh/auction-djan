@@ -117,14 +117,14 @@ def createlisting(request):
             price = request.POST["salesprice"]
             description = request.POST["description"]
             current_user = request.user                
-            obj = Listings.objects.get_or_create(owner=current_user)
+            obj = Listings.objects.create(owner=current_user)
             obj.item_name = product
             obj.category = category
             obj.price = price
             obj.description = description
             obj.owner = str(current_user)
             obj.save()
-            return HttpResponseRedirect(reverse("createlisting"))
+            return HttpResponseRedirect(reverse("index"))
     except:
             return render(request, "auctions/createlisting.html", {
                     "message": "Please enter correct values except"
