@@ -115,11 +115,13 @@ def createlisting(request):
             product = request.POST["productname"]
             category = request.POST["productcategory"]
             price = request.POST["salesprice"]
+            description = request.POST["description"]
             current_user = request.user                
             obj = Listings.objects.create(owner=current_user)
             obj.item_name = product
             obj.category = category
             obj.price = price
+            obj.description = description
             obj.owner = str(current_user)
             obj.save()
     except:

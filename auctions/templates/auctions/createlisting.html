@@ -12,18 +12,22 @@
 
     <fieldset>
       <legend>Add Product</legend>
-            
- 
-<p>
-        <label>Product Name <input name="productname" required/></label>
+      <p>
+        <label>Product Name : <input name="productname" required/></label>
       </p>
        
-<p>
-        <label>Category<input name="productcategory" required/></label>
+      <p>
+        <label>Category : <input name="productcategory" required/></label>
       </p>
 
       <p>
-        <label>Price<input type="number" required min="0" value="0" step=".01" name="salesprice" /></label>
+        <label>Description : <textarea rows = "2" cols = "40" name = "description" required>
+          Enter item description here.....
+       </textarea></label>
+      </p>
+
+      <p>
+        <label>Price : <input type="number" required min="0" value="0" step=".01" name="salesprice" /></label>
       </p>
 
       <input type="submit" name="submit" />
