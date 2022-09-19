@@ -124,6 +124,7 @@ def createlisting(request):
             obj.description = description
             obj.owner = str(current_user)
             obj.save()
+            return HttpResponseRedirect(reverse("createlisting"))
     except:
             return render(request, "auctions/createlisting.html", {
                     "message": "Please enter correct values except"
