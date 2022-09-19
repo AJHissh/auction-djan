@@ -3,7 +3,7 @@
 {% block body %}
 
 {% if user.is_authenticated %}
-<form action="{% url 'createlisting' %}" method="POST">
+<form action="{% url 'createlisting' %}" method="POST" onsubmit="submit.disabled = true; return true;">
   {%csrf_token%}
   
   {% if message %}
