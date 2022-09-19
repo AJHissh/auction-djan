@@ -67,7 +67,7 @@ def register(request):
 
 def categories(request):
     temp_list = []
-    queries = Listings.objects.all().distinct()
+    queries = Listings.objects.all()
     for i in queries:
         if i.category not in temp_list:
             temp_list.append(i.category)
