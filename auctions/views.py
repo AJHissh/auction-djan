@@ -8,6 +8,7 @@ from .models import User, Listings
 
 def index(request):
     queries = Listings.objects.all()
+    #  queries = Listings.objects.filter(category='Food')
     
     return render(request, "auctions/index.html", {
         "data" : queries
@@ -72,12 +73,21 @@ def categories(request):
         if i.category not in temp_list:
             temp_list.append(i.category)
             print(i.category)
-    #  queries = Listings.objects.filter(category="Household")
     upd_queries = temp_list 
     print(temp_list)
     return render(request, "auctions/categories.html", {
         "data" : upd_queries
     })
+    
+def subcategories(request):
+    temp_list = []
+    name = request.GET['name']
+    print(name)
+    queries = Listings.objects.filter(category=name)
+    return render(request, "auctions/subcategories.html", {
+        "data" : queries
+    })
+    
 
 def watchlist(request):
     return render(request, "auctions/watchlist.html")
@@ -130,4 +140,6 @@ def createlisting(request):
                     "message": "Please enter correct values except"
                 })    
     return render(request, "auctions/createlisting.html")
+
+
 

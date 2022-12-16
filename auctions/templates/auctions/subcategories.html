@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if data %}
+    <div>
+        <ol>
+            {% for dat in data %}
+            <li><b>{{ dat.item_name }}</b></li>
+            <ul>
+                <li><strong>Category:</strong> {{ dat.category }}</li>
+                <li><strong>Description:</strong> {{ dat.description }} </li>
+                <li><strong>Price:</strong> ${{ dat.price }}</li>
+                <li><strong>Listing Date:</strong> {{dat.date_created}} </li>
+                <li><strong>Seller:</strong> {{ dat.owner }} </li>
+            </ul>
+            {% endfor %}
+        </ol>
+    </div>
+
+{% else %}
+    No active listings
+
+{% endif %}
+
+{% endblock %}
