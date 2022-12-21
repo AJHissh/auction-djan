@@ -3,13 +3,11 @@
 {% block body %}
 
 {% if user.is_authenticated %}
-<form action="{% url 'createlisting' %}" method="POST" onsubmit="submit.disabled = true; return true;">
-  {%csrf_token%}
-  
+<form action="{% url 'createlisting' %}" method="POST" enctype=”multipart/form-data” onsubmit="submit.disabled = true; return true;">
+  {%csrf_token%} 
   {% if message %}
   <div>{{ message }}</div>
   {% endif %}
-
     <fieldset>
       <legend>Add Product</legend>
       <p>
@@ -29,6 +27,10 @@
       <p>
         <label>Price : <input type="number" required min="0" value="0" step=".01" name="salesprice" /></label>
       </p>
+
+      <p>
+        <label>Photo : <input type="file" id="img" name="img" accept="image/*"/></label>
+      </p> 
 
       <input type="submit" name="submit" />
  

@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import User, Listings
+from .forms import ImageForm
+from django.contrib import messages
 
 def index(request):
     queries = Listings.objects.all()
@@ -126,14 +128,17 @@ def createlisting(request):
             category = request.POST["productcategory"]
             price = request.POST["salesprice"]
             description = request.POST["description"]
+            image = request.POST['img']               
             current_user = request.user                
             obj = Listings.objects.create(owner=current_user)
             obj.item_name = product
             obj.category = category
             obj.price = price
             obj.description = description
+            obj.image = image
             obj.owner = str(current_user)
             obj.save()
+            messages.success(request, "Listing")
             return HttpResponseRedirect(reverse("index"))
     except:
             return render(request, "auctions/createlisting.html", {
