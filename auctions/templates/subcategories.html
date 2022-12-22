@@ -1,4 +1,4 @@
-{% extends "auctions/layout.html" %}
+{% extends "layout.html" %}
 
 {% block body %}
 
@@ -13,6 +13,8 @@
                 <li><strong>Price:</strong> ${{ dat.price }}</li>
                 <li><strong>Listing Date:</strong> {{dat.date_created}} </li>
                 <li><strong>Seller:</strong> {{ dat.owner }} </li>
+                <img src= http://127.0.0.1:8000/media/{{dat.image}} width="200" height="200"/>
+                <br>
                 <input type="submit" value="Bid" name="Bid"/>
             </ul>
             {% endfor %}

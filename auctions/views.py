@@ -12,7 +12,7 @@ def index(request):
     queries = Listings.objects.all()
     #  queries = Listings.objects.filter(category='Food')
     
-    return render(request, "auctions/index.html", {
+    return render(request, "index.html", {
         "data" : queries
     })
 
@@ -29,11 +29,11 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "auctions/login.html", {
+            return render(request, "login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "auctions/login.html")
+        return render(request, "login.html")
 
 
 def logout_view(request):
@@ -50,7 +50,7 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "auctions/register.html", {
+            return render(request, "register.html", {
                 "message": "Passwords must match."
             })
 
@@ -59,13 +59,13 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "auctions/register.html", {
+            return render(request, "register.html", {
                 "message": "Username already taken."
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
-        return render(request, "auctions/register.html")
+        return render(request, "register.html")
 
 
 def categories(request):
@@ -77,7 +77,7 @@ def categories(request):
             print(i.category)
     upd_queries = temp_list 
     print(temp_list)
-    return render(request, "auctions/categories.html", {
+    return render(request, "categories.html", {
         "data" : upd_queries
     })
     
@@ -86,13 +86,13 @@ def subcategories(request):
     name = request.GET['name']
     print(name)
     queries = Listings.objects.filter(category=name)
-    return render(request, "auctions/subcategories.html", {
+    return render(request, "subcategories.html", {
         "data" : queries
     })
     
 
 def watchlist(request):
-    return render(request, "auctions/watchlist.html")
+    return render(request, "watchlist.html")
 
 @login_required
 def edit_profile(request):
@@ -118,33 +118,52 @@ def edit_profile(request):
         user = authenticate(request, username=current_user, password=password)
         login(request, user)
         return HttpResponseRedirect(reverse("edit_profile"))
-    return render(request, "auctions/edit.html") 
+    return render(request, "edit.html") 
             
 @login_required
 def createlisting(request):
-    try:
-        if request.method == "POST":
-            product = request.POST["productname"]
-            category = request.POST["productcategory"]
-            price = request.POST["salesprice"]
-            description = request.POST["description"]
-            image = request.POST['img']               
-            current_user = request.user                
-            obj = Listings.objects.create(owner=current_user)
-            obj.item_name = product
-            obj.category = category
-            obj.price = price
-            obj.description = description
-            obj.image = image
-            obj.owner = str(current_user)
-            obj.save()
-            messages.success(request, "Listing")
-            return HttpResponseRedirect(reverse("index"))
-    except:
-            return render(request, "auctions/createlisting.html", {
-                    "message": "Please enter correct values except"
-                })    
-    return render(request, "auctions/createlisting.html")
+        if request.method == 'POST':
+            form = ImageForm(request.POST, request.FILES)
+ 
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.owner = request.user
+                obj.save()
+                return render(request, "createlisting.html")
+        else:
+            form = ImageForm()
+        return render(request, "createlisting.html", {'form': form})
+ 
+ 
+def success(request):
+    return HttpResponse('successfully uploaded')
+    
+    
+    # try:
+    #     if request.method == "POST":
+    #         product = request.POST["productname"]
+    #         category = request.POST["productcategory"]
+    #         price = request.POST["salesprice"]
+    #         description = request.POST["description"]
+    #         image = request.POST['img']
+    #         form = ImageForm(request.POST, request.FILES)
+    #         form.save()               
+    #         current_user = request.user                
+    #         obj = Listings.objects.create(owner=current_user)
+    #         obj.item_name = product
+    #         obj.category = category
+    #         obj.price = price
+    #         obj.description = description
+    #         obj.image = image
+    #         obj.owner = str(current_user)
+    #         obj.save()
+    #         messages.success(request, "Listing")
+    #         return HttpResponseRedirect(reverse("index"))
+    # except:
+    #         return render(request, "createlisting.html", {
+    #                 "message": "Please enter correct values except"
+    #             })    
+    # return render(request, "createlisting.html", {'form': form})
 
 
 

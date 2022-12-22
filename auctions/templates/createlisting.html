@@ -1,11 +1,11 @@
-{% extends "auctions/layout.html" %}
+{% extends "layout.html" %}
 
 {% block body %}
 
 {% if user.is_authenticated %}
 <form action="{% url 'createlisting' %}" method="POST" enctype=”multipart/form-data” onsubmit="submit.disabled = true; return true;">
   {%csrf_token%} 
-  {% if message %}
+  {% comment %} {% if message %}
   <div>{{ message }}</div>
   {% endif %}
     <fieldset>
@@ -30,11 +30,11 @@
 
       <p>
         <label>Photo : <input type="file" id="img" name="img" accept="image/*"/></label>
-      </p> 
-
-      <input type="submit" name="submit" />
+      </p>  {% endcomment %}
+      {{ form.as_p}}
+      <button type="submit"> Upload </button>
  
-     </fieldset>
+     {% comment %} </fieldset> {% endcomment %}
     </form>
 {% else %}
     Not signed in.
