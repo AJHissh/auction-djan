@@ -9,7 +9,7 @@ from .models import User,Listings
 # Register your models here.
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ("id" , "category",  "item_name", "price")
+    list_display = ("id" , "category",  "item_name", "price", "image")
     
 class UserAdmin(admin.ModelAdmin):
     list_display = ("id" , "username", "email", "first_name", "last_name", "last_login", "is_active")

@@ -3,39 +3,11 @@
 {% block body %}
 
 {% if user.is_authenticated %}
-<form action="{% url 'createlisting' %}" method="POST" enctype=”multipart/form-data” onsubmit="submit.disabled = true; return true;">
+<form action="" method="POST" enctype="multipart/form-data">
   {%csrf_token%} 
-  {% comment %} {% if message %}
-  <div>{{ message }}</div>
-  {% endif %}
-    <fieldset>
-      <legend>Add Product</legend>
-      <p>
-        <label>Product Name : <input name="productname" required/></label>
-      </p>
-       
-      <p>
-        <label>Category : <input name="productcategory" required/></label>
-      </p>
-
-      <p>
-        <label>Description : <textarea rows = "2" cols = "40" name = "description" required>
-          Enter item description here.....
-       </textarea></label>
-      </p>
-
-      <p>
-        <label>Price : <input type="number" required min="0" value="0" step=".01" name="salesprice" /></label>
-      </p>
-
-      <p>
-        <label>Photo : <input type="file" id="img" name="img" accept="image/*"/></label>
-      </p>  {% endcomment %}
       {{ form.as_p}}
       <button type="submit"> Upload </button>
- 
-     {% comment %} </fieldset> {% endcomment %}
-    </form>
+  </form>
 {% else %}
     Not signed in.
 {% endif %}

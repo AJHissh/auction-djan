@@ -12,8 +12,11 @@ class Listings(models.Model):
     category = models.CharField(max_length=255, default="None", unique=False)
     price = models.DecimalField(max_digits = 14, decimal_places=2, null=False, blank=True, default=0)
     date_created = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images/', blank=True)
-    owner = models.CharField(unique=False, max_length=255)   
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    owner = models.CharField(unique=False, max_length=255)
+    
+    def __str__(self):
+        return self.item_name 
 
 class Bids(models.Model):
     item_name = models.CharField(max_length=255)

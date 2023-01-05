@@ -138,32 +138,4 @@ def createlisting(request):
 def success(request):
     return HttpResponse('successfully uploaded')
     
-    
-    # try:
-    #     if request.method == "POST":
-    #         product = request.POST["productname"]
-    #         category = request.POST["productcategory"]
-    #         price = request.POST["salesprice"]
-    #         description = request.POST["description"]
-    #         image = request.POST['img']
-    #         form = ImageForm(request.POST, request.FILES)
-    #         form.save()               
-    #         current_user = request.user                
-    #         obj = Listings.objects.create(owner=current_user)
-    #         obj.item_name = product
-    #         obj.category = category
-    #         obj.price = price
-    #         obj.description = description
-    #         obj.image = image
-    #         obj.owner = str(current_user)
-    #         obj.save()
-    #         messages.success(request, "Listing")
-    #         return HttpResponseRedirect(reverse("index"))
-    # except:
-    #         return render(request, "createlisting.html", {
-    #                 "message": "Please enter correct values except"
-    #             })    
-    # return render(request, "createlisting.html", {'form': form})
-
-
 
