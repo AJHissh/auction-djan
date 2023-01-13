@@ -91,9 +91,6 @@ def subcategories(request):
     })
     
 
-def watchlist(request):
-    return render(request, "watchlist.html")
-
 @login_required
 def edit_profile(request):
     if request.method == "POST":
@@ -133,9 +130,18 @@ def createlisting(request):
         else:
             form = ImageForm()
         return render(request, "createlisting.html", {'form': form})
+    
+    
+@login_required
+def watchlist(request):
+    return render(request, "watchlist.html")
+
+def listings(request):
+    return render(request, "listings.html")
+    
  
  
-def success(request):
-    return HttpResponse('successfully uploaded')
+# def success(request):
+#     return HttpResponse('successfully uploaded')
     
 

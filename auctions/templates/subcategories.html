@@ -6,7 +6,7 @@
     <div>
         <ol>
             {% for dat in data %}
-            <li><b>{{ dat.item_name }}</b></li>
+            <li><b><a href="{% url 'listings' %}">{{ dat.item_name }}</a></b></li>
             <ul>
                 <li><strong>Category:</strong> {{ dat.category }}</li>
                 <li><strong>Description:</strong> {{ dat.description }} </li>
@@ -16,6 +16,7 @@
                 <img src= http://127.0.0.1:8000/media/{{dat.image}} width="200" height="200"/>
                 <br>
                 <input type="submit" value="Bid" name="Bid"/>
+                <input type="submit" value="Add to Watchlist" name="Watchlist"/>
             </ul>
             {% endfor %}
         </ol>
