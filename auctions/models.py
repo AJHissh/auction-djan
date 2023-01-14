@@ -31,6 +31,6 @@ class Bids(models.Model):
 class Comments(models.Model):
     content = models.TextField()
     # slug = models.SlugField(unique=True, max_length=255)
-    item_name = item_name = models.CharField(max_length=255)
+    item_name = models.CharField(max_length=255)
     date_created = models.DateTimeField(auto_now=True)
     owner = models.CharField(max_length=255) 
