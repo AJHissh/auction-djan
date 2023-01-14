@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
+
 
 
 class User(AbstractUser):
@@ -19,10 +21,10 @@ class Listings(models.Model):
         return self.item_name 
 
 class Bids(models.Model):
-    item_name = models.CharField(max_length=255)
-    # slug = models.SlugField(unique=True, max_length=255)
-    bid = models.IntegerField(null=False, blank=True, default=0)
-    date_created = models.DateTimeField(auto_now=True)
+    item_name = models.ForeignKey(Listings, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    bid = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=True, default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=255)   
 
 
